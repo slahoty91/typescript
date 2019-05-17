@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,6 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+exports.__esModule = true;
 /*
 let obj1 = {
     name: "ABC",
@@ -84,3 +86,33 @@ console.log(c12.fullName);
 // let P1 = new Person1();
 // P1.fullName ="Sidd";
 // console.log(P1.fullName);
+var Department = /** @class */ (function () {
+    function Department() {
+    }
+    Department.prototype.Details = function () {
+    };
+    return Department;
+}());
+var comp = /** @class */ (function (_super) {
+    __extends(comp, _super);
+    function comp() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    comp.prototype.DepStr = function () {
+    };
+    return comp;
+}(Department));
+var Person3 = /** @class */ (function () {
+    function Person3() {
+        Person3.count++;
+    }
+    Person3.GetPersonCount = function () {
+        return Person3.count;
+    };
+    Person3.count = 0;
+    return Person3;
+}());
+var per1 = new Person3();
+var per2 = new Person3();
+console.log(Person3.GetPersonCount());
+//Booking system

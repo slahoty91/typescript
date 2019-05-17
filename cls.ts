@@ -78,7 +78,7 @@ console.log(sq1.breadth);
 // open bank acount,
 // perform operation as credit, debit, checkBal,  
 
-class Bank{
+export class Bank{
 
     name:string;
     branch:string;

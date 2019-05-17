@@ -3,6 +3,7 @@
 //Along with method signature wecan create variables.
 //Abstraction
 // By default values are public
+import {Bank} from'./cls'
 interface IPayment{
     transation(amount:number,interfaceNumber:string,userId):number;
     reversePayment(transationId:number);
@@ -98,3 +99,22 @@ class comp extends Department{
 
     }
 }
+
+class Person3 {
+
+    static count:number = 0;
+    static GetPersonCount(){
+        return Person3.count;
+    }
+
+    constructor(){
+        Person3.count++;
+    }
+
+}
+
+let per1 = new Person3();
+let per2 = new Person3();
+console.log(Person3.GetPersonCount());
+
+//Booking system
