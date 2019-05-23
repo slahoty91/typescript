@@ -48,13 +48,35 @@ class City{
     listOfMovies: Array<Movies> = [];
     listOfTheater: Array<Theater> = [];
 
-    constructor(name,listOfMovies,listOfTheater){
+    constructor(name:cityName){
 
         this.name = name;
-        this.listOfMovies.push(listOfMovies);
-        this.listOfTheater.push(listOfTheater);
 
     }
+
+    addMovie(movie:Movies[]){
+
+        this.listOfMovies.concat(movie);
+        console.log(`${movie} added to ${this.name}`);
+
+    }
+
+    // addMovielist(movie:Movies){
+    //     this.listOfMovies.push(movie);
+    // }
+
+    addTheater(theater:Theater){
+
+        this.listOfTheater.push(theater);
+        console.log(`${theater} is added to ${this.name}`);
+
+    }
+
+    // removeMovie(movie:Movies){
+
+    //     this.listOfMovies[this.listOfMovies.indexOf(movie)] = ;
+
+    // }
 
 }
 
@@ -67,75 +89,107 @@ enum cityName{
 
 }
 
-class Theater{
+class Theater extends City{
 
-    name:string;
-    listOfMovies: Array<Movies>;
-    listOfCinama: Array<Cinema>;
-    city: cityName;
-
-    constructor(name:string,listOfMovies:Movies[],listOfCinama:Cinema[]){
-
-        this.name = name;
-        this.listOfMovies = listOfMovies;
-        this.listOfCinama = listOfCinama;
-
-    }
-
-    display(){
-        
-        console.log(`From ${cityName[this.city]} following ciname are their \n${this.listOfCinama}`);
-        
-    }
-
-}
-
-class Cinema{
-
-    name:string;
-    schedual:Schedual;
-    movie: Movies;
-    numberOfSeats: number;
-
-    constructor(name,schedual,movie,numberOfSeats){
-
-        this.name = name;
-        this.schedual = schedual;
-        this.movie = movie;
-        this.numberOfSeats = numberOfSeats;
+    nameTheater:string;
+    listOfMoviesInTheater: Array<Movies> = [];
+    listOfHalls: Array<Hall> = [];
 
 
-    }
+    addMovieTheater(movie:Movies){
 
-    display(){
+        //let i = this.listOfTheater.indexOf(theater);
 
-        console.log(`${this.name} has following movies \n${
-            this.movie.name
-        } at ${Schedual[this.schedual]}`);
-
-    }
-
-    bookTicket(nos:number){
-
-        this.numberOfSeats -= nos;
-
-        if(this.movie.isAdult){
-            console.log(`Congrats you have booked ${nos} seats for ${
-                this.movie.name} \nkindly carry ID card as it's an adult movie.`);
+        if(this.listOfMovies.indexOf(movie) != -1){
+            this.listOfMoviesInTheater.push(movie);
+            console.log(`Movie ${movie.name} is added.`);
         }else{
-            console.log(`Congrats you have booked ${nos} seats for ${
-                this.movie.name}`);
+            console.log(`${movie} is not available in ${this.name}`);
         }
 
     }
 
+    addHall(hall:Hall){
+
+        this.listOfHalls.push(hall);
+        console.log(`Hall ${hall.name} is added to theater.`);
+
+    }
+
+    display(){
+        
+        console.log(`From ${this.name} following halls are their \n${this.listOfHalls}`);
+        
+    }
+
 }
+
+class Hall{
+
+    public name:string;
+    protected schedual:Array<Schedual>=[];
+    protected movie: Array<Movies>=[];
+    protected numberOfSeats: Array<number>=[];
+ //   protected showID: Array<Number>;
+
+    constructor(name:string,numberOfSeats:number){
+
+        this.name = name;
+        this.numberOfSeats.push(numberOfSeats);
+        
+    }
+
+    protected addMovie(movie:Movies,schedual:Schedual){
+
+        if(this.schedual.indexOf(schedual) == -1){
+
+            this.movie.push(movie);
+            this.schedual.push(schedual);
+            console.log(`Movie ${movie.name} will screen at ${Schedual[schedual]}`);
+
+        }else{
+            console.log(`${Schedual[schedual]} is already booked.`);
+        }
+
+    } 
+
+}
+
+class Booking extends Hall{
+
+    protected seatsLeft:Array<number> = this.numberOfSeats;
+
+    protected BookTicket(movie:Movies,schedual:Schedual,nos:number){
+
+        let i:Array<number> = [];
+        let j = 0;
+        if(this.schedual.indexOf(schedual) == this.movie.indexOf(movie)){
+            
+        }
+
+        this.movie.forEach(function(cur,index){
+            if(cur == movie){
+                i.push(index);
+            }
+        })
+
+        j = this.schedual.indexOf(schedual);
+
+        if(i.indexOf(j) != -1){
+            this.seatsLeft[j] -= nos;
+        }
+
+        
+    }
+
+}
+
 enum Schedual{
 
-    morning = '10 to 13 in hrs',
+    morning = '09 to 12 hrs',
     evening = '13 to 17 in hrs',
     night = '17 to 20 in hrs',
-    lateNight = '20 to 23 in hrs'
+    lateNight = '20 to 23 in hrs',
 
 }
 
@@ -184,10 +238,35 @@ let m10 = new Movies('Shazam',gen.Comedy,M2cast,false);
 let m11 = new Movies('Glass',gen.Action,M3cast,false);
 let m12 = new Movies('Hellboy',gen.Action,M4cast,false);
 
-let listOfMoviesC1:Array<Movies> = [m1,m2,m3,m4];
+// let listOfMoviesC1:Array<Movies> = [m1,m2,m3,m4];
 let listOfMoviesC2:Array<Movies> = [m5,m6,m7,m8];
-let listOfMoviesC3:Array<Movies> = [m9,m10,m11,m12];
+// let listOfMoviesC3:Array<Movies> = [m9,m10,m11,m12];
 
-//let listOfMoviesT1:Array<Movies> = []
+let c1 = new City(cityName.Banglore);
+c1.addMovie(m1);
+c1.addMovie(listOfMoviesC2);
+c1.addMovie(m2);
+c1.addMovie(m3);
+c1.addMovie(m4);
+c1.addMovie(m5);
+c1.addMovie(m6);
 
-//let lT1 = new Theater('Abc',)
+let h1 = new Hall('Inox - 1',80);
+let h2 = new Hall('Inox - 2',120);
+let h3 = new Hall('Inox - 3',100);
+
+let T1 = new Theater(cityName.Banglore);
+
+T1.addHall(h1);
+T1.addHall(h2);
+T1.addHall(h3);
+
+T1.addMovie(m1);
+T1.addMovie(m2);
+T1.addMovie(m3);
+T1.addMovie(m4);
+T1.addMovie(m5);
+T1.addMovie(m6);
+T1.addMovie(m7);
+
+
